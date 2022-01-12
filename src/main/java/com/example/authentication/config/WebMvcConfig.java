@@ -17,10 +17,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
         return new UrlInterceptor();
     }
 
+    @Bean
+    public UrlOperationInterceptor urlOperationInterceptor(){
+        return new UrlOperationInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //权限拦截器
         registry.addInterceptor(urlInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(urlOperationInterceptor()).addPathPatterns("/**");
     }
 
 }
