@@ -54,4 +54,24 @@ public class ResourceController {
     public String url7(){
         return HAVE_AUTH;
     }
+
+    @RequestMapping(value = "/test/url1")
+    public String testUrl1(){
+        return HAVE_AUTH;
+    }
+
+    @RequestMapping(value = "/test/url2")
+    public String testUrl2(){
+        return HAVE_AUTH;
+    }
+
+    @RequestMapping(value = "/test1/url3")
+    public String test1Url3(){
+        return HAVE_AUTH;
+    }
+
+    @RequestMapping(value = "/test1/url4")
+    public String testUrl4(){
+        return HAVE_AUTH;
+    }
 }

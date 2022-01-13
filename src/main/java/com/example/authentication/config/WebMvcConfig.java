@@ -1,5 +1,8 @@
 package com.example.authentication.config;
 
+import com.example.authentication.config.interceptor.UrlInterceptor;
+import com.example.authentication.config.interceptor.UrlOperationInterceptor;
+import com.example.authentication.config.interceptor.UrlRoleInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -13,13 +16,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Bean
-    public UrlInterceptor urlInterceptor(){
+    public UrlInterceptor urlInterceptor() {
         return new UrlInterceptor();
     }
 
     @Bean
-    public UrlOperationInterceptor urlOperationInterceptor(){
+    public UrlOperationInterceptor urlOperationInterceptor() {
         return new UrlOperationInterceptor();
+    }
+
+    @Bean
+    public UrlRoleInterceptor urlRoleInterceptor() {
+        return new UrlRoleInterceptor();
     }
 
     @Override
@@ -27,6 +35,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //权限拦截器
         registry.addInterceptor(urlInterceptor()).addPathPatterns("/**");
         registry.addInterceptor(urlOperationInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(urlRoleInterceptor()).addPathPatterns("/**");
     }
 
 }

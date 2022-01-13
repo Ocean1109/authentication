@@ -1,4 +1,4 @@
-package com.example.authentication.config;
+package com.example.authentication.config.interceptor;
 
 import com.example.authentication.annotation.UrlAnnotation;
 import com.example.authentication.constant.CRUDConstant;
@@ -26,7 +26,7 @@ public class UrlOperationInterceptor implements HandlerInterceptor {
         Method method = handlerMethod.getMethod();
         UrlAnnotation urlAnnotation = method.getAnnotation(UrlAnnotation.class);
         if (urlAnnotation == null) {
-            throw new ApiException("当前用户没有访问" + requestURL + "的权限");
+            return true;
         }
         String type = urlAnnotation.type();
         //2.登录成功后 根据用户token中的信息获取到用户对应的URL权限集合
@@ -34,7 +34,7 @@ public class UrlOperationInterceptor implements HandlerInterceptor {
         if (list.contains(type)) {
             return true;
         } else {
-            throw new ApiException("当前用户没有访问路径" + requestURL + "的权限");
+            throw new ApiException("操作权限问题：当前用户没有访问路径" + requestURL + "的权限");
         }
 
     }
